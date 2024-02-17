@@ -1,0 +1,8 @@
+{
+    "prettier.bracketSameLine": true,
+    "prettier.printWidth": 80,
+    "prettier.tabWidth": 2,
+    "typescript.tsserver.web.projectWideIntellisense.suppressSemanticErrors": true,
+    "typescript.tsserver.web.projectWideIntellisense.enabled": true,
+    "prettier.bracketSpacing": true
+}
