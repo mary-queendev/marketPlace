@@ -11,7 +11,7 @@ export interface CustomCard {
 
 export default function CustomCard({ title, subtitle, image, onPress }: CustomCard) {
   return (
-    <View>
+    <View style={{marginBottom: 20}}>
       <View>
         <Image
           source={image}
@@ -31,8 +31,8 @@ export default function CustomCard({ title, subtitle, image, onPress }: CustomCa
           borderBottomStartRadius: 15,
         }}
       >
-        <Text style={{ fontSize: 20, marginBottom: 6 }}>{title}</Text>
-        <Text
+        <Text numberOfLines={1} style={{ fontSize: 20, marginBottom: 6 }}>{title}</Text>
+        <Text numberOfLines={2}
           style={{
             fontSize: 18,
             color: Theme.primaryColor,

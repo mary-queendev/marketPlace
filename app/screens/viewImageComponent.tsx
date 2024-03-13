@@ -1,9 +1,9 @@
 import React, { useRef } from "react";
 import { Image, ScrollView, Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Theme } from "../../styles/Theme";
-import { SafeArea } from "../../AreaView";
-import { saleBackground } from "../../assets";
+import { Theme } from "../styles/Theme";
+import { SafeArea } from "../AreaView";
+import { saleBackground } from "../assets";
 
 export default function ViewImages() {
   return (

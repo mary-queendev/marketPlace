@@ -12,12 +12,12 @@ export interface IconComponent {
 export default function IconComponent({
   name,
   size= 40,
-  backgroundColor= "black",
+  backgroundColor,
   iconColor="white",
 }: IconComponent) {
   return <View style={{
-    width: size, height: size, backgroundColor, borderRadius: size / 2, alignItems: "center", justifyContent:"center"
+    width: size, height: size, backgroundColor, borderRadius: size / 2, alignItems: "center", justifyContent:"center",
   }}>
-   <MaterialCommunityIcons name={name} size={size / 2} color={iconColor}/>
+   <MaterialCommunityIcons name={name} size={size} color={iconColor}/>
   </View>;
 }

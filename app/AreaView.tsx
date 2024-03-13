@@ -12,7 +12,8 @@ export function SafeArea({ children }) {
 
 const styles = StyleSheet.create({
   container: {
-   
-    marginTop: Platform.OS === "android" ? StatusBar.currentHeight : null,
+   backgroundColor: Theme.backgroundGrey,
+   flex: 1,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : null,
   },
 });
