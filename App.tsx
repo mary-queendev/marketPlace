@@ -12,6 +12,8 @@ import { AppPicker } from "./app/components/customPicker";
 import { useState } from "react";
 import LoginScreen from "./app/screens/LoginScreen";
 import PostItemScreen from "./app/screens/PostItemScreen";
+import { ImageInput } from "./app/components/imageInput";
+
 
 const category = [
   { label: "Furniture", value: 1 },
@@ -40,6 +42,7 @@ export default function App() {
       /> */}
       {/* <LoginScreen/> */}
       <PostItemScreen/>
+   
     </SafeArea>
   );
 }

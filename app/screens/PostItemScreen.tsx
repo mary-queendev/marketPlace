@@ -1,5 +1,5 @@
 import { Formik } from "formik";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import * as yup from "yup";
 import { AppTextInput } from "../components/textInput";
@@ -8,6 +8,9 @@ import { AppPicker } from "../components/customPicker";
 import { CustomButton } from "../components/buttons";
 import { AppErrorMessage } from "../components/appErrorMessage";
 import { Theme } from "../styles/Theme";
+import { ImageInput } from "../components/imageInput";
+import * as ImagePicker from "expo-image-picker";
+
 
 const validationSchema = yup.object({
   title: yup.string().required().label("Title").min(3),
@@ -24,6 +27,21 @@ const category = [
 
 export default function PostItemScreen() {
   const [selectedCategory, setSelectedCategory] = useState();
+  const [imageUri, setImageUri] = useState();
+
+
+  const requestPermissions = async () => {
+    const result = ImagePicker.getMediaLibraryPermissionsAsync();
+
+    const { granted } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (!granted && !result) {
+      alert("You need to enable permissions for camera");
+    }
+  };
+
+  useEffect(() => {
+    requestPermissions();
+  }, []);
 
   return (
     <Formik
@@ -40,6 +58,8 @@ export default function PostItemScreen() {
         setFieldValue,
       }) => (
         <View style={{ padding: 14 }}>
+          <ImageInput imageUri={imageUri} setImageUri={setImageUri}/>
+
           <AppTextInput
             placeholder="Title"
             autoCapitalize="none"

@@ -32,7 +32,7 @@ export default function AppPicker({
   selectedItem,
   onSelectedItem,
   valueSelected,
-  placeholderColor
+  placeholderColor,
 }: AppPicker) {
   //   const [on, setOn] = useState();
 
@@ -58,7 +58,7 @@ export default function AppPicker({
               marginLeft: 10,
               fontSize: 18,
               flex: 1,
-              color:  placeholderColor ,
+              color: placeholderColor,
             }}>
             {selectedItem ? selectedItem : placeholder}
           </Text>
