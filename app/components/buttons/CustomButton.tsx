@@ -16,7 +16,7 @@ export interface CustomButton {
 
 export default function CustomButton({
   title,
-  borderColor =Theme.primaryColor,
+  borderColor = Theme.primaryColor,
   height,
   width,
   backgroundColor = Theme.primaryColor,
@@ -37,8 +37,7 @@ export default function CustomButton({
         backgroundColor: backgroundColor,
         borderColor: borderColor,
       }}
-      onPress={onPress}
-    >
+      onPress={onPress}>
       <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>
         {title}
       </Text>

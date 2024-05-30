@@ -12,8 +12,9 @@ import { AppPicker } from "./app/components/customPicker";
 import { useState } from "react";
 import LoginScreen from "./app/screens/LoginScreen";
 import PostItemScreen from "./app/screens/PostItemScreen";
+import "react-native-reanimated";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { ImageInput } from "./app/components/imageInput";
-
 
 const category = [
   { label: "Furniture", value: 1 },
@@ -25,24 +26,27 @@ export default function App() {
   const [selectedCategory, setSelectedCategory] = useState();
 
   return (
-    <SafeArea>
-      {/* <LandingPage/> */}
-      {/* <ListingsScreen/> */}
-      {/* <ViewImages/> */}
-      {/* <MessagesScreen/> */}
-      {/* <IconComponent name='email'/> */}
-      {/* <AccountScreen/> */}
-      {/* <AppTextInput icon='email' placeholder= "Mary Ogbeide" iconColor='blue'/> */}
-      {/* <AppPicker
+    <View style={{ flex: 1 }}>
+      <SafeArea>
+        <GestureHandlerRootView>
+          {/* <LandingPage/> */}
+          {/* <ListingsScreen/> */}
+          {/* <ViewImages/> */}
+          {/* <MessagesScreen/> */}
+          {/* <IconComponent name='email'/> */}
+          {/* <AccountScreen/> */}
+          {/* <AppTextInput icon='email' placeholder= "Mary Ogbeide" iconColor='blue'/> */}
+          {/* <AppPicker
         selectedItem={selectedCategory}
         onSelectedItem={item=> setSelectedCategory(item)}
         items={category}
         placeholder="Category"
         icon="apps"
       /> */}
-      {/* <LoginScreen/> */}
-      <PostItemScreen/>
-   
-    </SafeArea>
+          {/* <LoginScreen/> */}
+          <PostItemScreen />
+        </GestureHandlerRootView>
+      </SafeArea>
+    </View>
   );
 }

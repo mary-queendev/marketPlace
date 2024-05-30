@@ -13,7 +13,7 @@ import {
 import * as ImagePicker from "expo-image-picker";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-export default function ImageInput({ imageUri, setImageUri }) {
+export default function ImageInput({ imageUri, setImageUri}) {
   const [displayImage, setDisplayImage] = useState(false);
 
   const handleClick = async () => {

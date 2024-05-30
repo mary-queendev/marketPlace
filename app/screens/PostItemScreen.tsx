@@ -1,6 +1,6 @@
 import { Formik } from "formik";
-import React, { useEffect, useState } from "react";
-import { View } from "react-native";
+import React, { useEffect, useState, useRef, useCallback } from "react";
+import { View, TouchableWithoutFeedback, Text } from "react-native";
 import * as yup from "yup";
 import { AppTextInput } from "../components/textInput";
 import { DropDownList } from "../components/dropdownList";
@@ -10,13 +10,15 @@ import { AppErrorMessage } from "../components/appErrorMessage";
 import { Theme } from "../styles/Theme";
 import { ImageInput } from "../components/imageInput";
 import * as ImagePicker from "expo-image-picker";
-
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
 
 const validationSchema = yup.object({
   title: yup.string().required().label("Title").min(3),
   description: yup.string().required().label("Description").min(3),
   price: yup.number().required().label("Price").min(4),
-  category: yup.object().required().label("Category").nullable(),
+  category: yup.string().required().label("Category").nullable(),
+  imageUri: yup.string().required().label("Image"),
 });
 
 const category = [
@@ -27,9 +29,8 @@ const category = [
 
 export default function PostItemScreen() {
   const [selectedCategory, setSelectedCategory] = useState();
-  const [imageUri, setImageUri] = useState();
 
-
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const requestPermissions = async () => {
     const result = ImagePicker.getMediaLibraryPermissionsAsync();
 
@@ -42,11 +43,20 @@ export default function PostItemScreen() {
   useEffect(() => {
     requestPermissions();
   }, []);
+  const showModal = useCallback(() => {
+    bottomSheetModalRef.current?.present();
+  }, []);
 
   return (
     <Formik
       onSubmit={(values) => console.log(values)}
-      initialValues={{ title: "", price: "", description: "", category: null }}
+      initialValues={{
+        title: "",
+        price: "",
+        description: "",
+        category: null,
+        imageUri: "",
+      }}
       validationSchema={validationSchema}>
       {({
         handleChange,
@@ -58,7 +68,12 @@ export default function PostItemScreen() {
         setFieldValue,
       }) => (
         <View style={{ padding: 14 }}>
-          <ImageInput imageUri={imageUri} setImageUri={setImageUri}/>
+          {/* <ImageInput imageUri={imageUri} setImageUri={setImageUri} /> */}
+          <ImageInput
+            imageUri={values.imageUri}
+            setImageUri={(uri: any) => setFieldValue("imageUri", uri)}
+          />
+          <AppErrorMessage error={errors.imageUri} visible={touched.imageUri} />
 
           <AppTextInput
             placeholder="Title"
@@ -79,18 +94,32 @@ export default function PostItemScreen() {
             onBlur={() => setFieldTouched("price")}
           />
           <AppErrorMessage error={errors.price} visible={touched.price} />
-          <AppPicker
-            placeholder="Category"
-            selectedItem={selectedCategory}
-            onSelectedItem={(item) => setSelectedCategory(item.label)}
-            items={category}
-            valueSelected={(item) => setFieldValue("category", item)}
-            placeholder="Category"
-            onChangeText={handleChange("category")}
-            onBlur={() => setFieldTouched("category")}
-            value={values.category}
-            placeholderColor={Theme.primaryColor}
-          />
+
+          <TouchableWithoutFeedback onPress={showModal}>
+            <View
+              style={{
+                padding: 10,
+                backgroundColor: "white",
+                borderRadius: 12,
+                flexDirection: "row",
+                width: "100%",
+                marginVertical: 10,
+                borderWidth: 1,
+              }}>
+              <Text
+                style={{
+                  marginLeft: 10,
+                  fontSize: 18,
+                  flex: 1,
+                  color: Theme.primaryColor,
+                }}>
+                {selectedCategory ? selectedCategory : "Category"}
+              </Text>
+
+              <MaterialCommunityIcons name="chevron-down" size={28} />
+            </View>
+            {/* <Switch value={on} onValueChange={(newValue) => setOn(newValue)} /> */}
+          </TouchableWithoutFeedback>
           <AppErrorMessage error={errors.category} visible={touched.category} />
 
           <AppTextInput
@@ -109,6 +138,20 @@ export default function PostItemScreen() {
             visible={touched.description}
           />
           <CustomButton title="POST" onPress={handleSubmit} />
+
+          <AppPicker
+            placeholder="Category"
+            selectedItem={selectedCategory}
+            onSelectedItem={(item) => setSelectedCategory(item.label)}
+            items={category}
+            valueSelected={(item) => setFieldValue("category", item.label)}
+            placeholder="Category"
+            onChangeText={handleChange("category")}
+            onBlur={() => setFieldTouched("category")}
+            value={values.category}
+            placeholderColor={Theme.primaryColor}
+            bottomSheetModalRef={bottomSheetModalRef}
+          />
         </View>
       )}
     </Formik>

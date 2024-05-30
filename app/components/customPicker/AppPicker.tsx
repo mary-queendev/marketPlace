@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import {
   Button,
   Modal,
@@ -8,10 +8,18 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import "react-native-reanimated";
+
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Theme } from "../../styles/Theme";
 import { FlatList } from "react-native";
 import { DropDownList } from "../dropdownList";
+import {
+  BottomSheetModal,
+  BottomSheetView,
+  BottomSheetModalProvider,
+} from "@gorhom/bottom-sheet";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export interface AppPicker {
   icon?: string;
@@ -19,12 +27,14 @@ export interface AppPicker {
   placeholder: string;
   items?: any;
   selectedItem?: any;
+  bottomSheetModalRef: any;
   onSelectedItem?: any;
   valueSelected?: any;
   placeholderColor?: string;
 }
 
 export default function AppPicker({
+  bottomSheetModalRef,
   icon,
   iconColor,
   placeholder,
@@ -36,58 +46,41 @@ export default function AppPicker({
 }: AppPicker) {
   //   const [on, setOn] = useState();
 
-  const [modalVisible, setModalVisible] = useState(false);
+  const snapPoints = useMemo(() => ["30%", "50%"], []);
+
+  const closeModal = useCallback(() => {
+    bottomSheetModalRef.current?.close();
+  }, []);
+
   return (
     <>
-      <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
-        <View
-          style={{
-            padding: 10,
-            backgroundColor: "white",
-            borderRadius: 12,
-            flexDirection: "row",
-            width: "100%",
-            marginVertical: 10,
-            borderWidth: 1,
-          }}>
-          {icon && (
-            <MaterialCommunityIcons name={icon} size={28} color={iconColor} />
-          )}
-          <Text
-            style={{
-              marginLeft: 10,
-              fontSize: 18,
-              flex: 1,
-              color: placeholderColor,
-            }}>
-            {selectedItem ? selectedItem : placeholder}
-          </Text>
-
-          <MaterialCommunityIcons
-            name="chevron-down"
-            size={28}
-            color={iconColor}
-          />
-        </View>
-        {/* <Switch value={on} onValueChange={(newValue) => setOn(newValue)} /> */}
-      </TouchableWithoutFeedback>
-      <Modal visible={modalVisible} animationType="slide">
-        <Button title="close modal" onPress={() => setModalVisible(false)} />
-        <FlatList
-          data={items}
-          keyExtractor={(item) => item.value.toString()}
-          renderItem={({ item }) => (
-            <DropDownList
-              label={item.label}
-              onPress={() => (
-                setModalVisible(false),
-                onSelectedItem(item),
-                valueSelected(item)
-              )}
+      {/* <Modal visible={modalVisible} animationType="slide"> */}
+      <BottomSheetModalProvider>
+        <BottomSheetModal
+          ref={bottomSheetModalRef}
+          index={1}
+          snapPoints={snapPoints}>
+          <View style={{ margin: 20, borderRadius: 20 }}>
+            <Button
+              color={Theme.primaryColor}
+              title="close modal"
+              onPress={closeModal}
             />
-          )}
-        />
-      </Modal>
+          </View>
+          <FlatList
+            data={items}
+            keyExtractor={(item) => item.value.toString()}
+            renderItem={({ item }) => (
+              <DropDownList
+                label={item.label}
+                onPress={() => (
+                  closeModal(), onSelectedItem(item), valueSelected(item)
+                )}
+              />
+            )}
+          />
+        </BottomSheetModal>
+      </BottomSheetModalProvider>
     </>
   );
 }
