@@ -4,6 +4,7 @@ import { CustomCard } from "../components/cards";
 import { SafeArea } from "../AreaView";
 import { ListItem } from "../components/listItem";
 import { Theme } from "../styles/Theme";
+
 import ListItemDeleteAction from "../components/listItemDeleteAction/ListItemDeleteAction";
 import { ListItemSeperator } from "../components/listItemSeperator";
 
@@ -19,6 +20,7 @@ const initialMessages = [
     title: "T2",
     description: "D2",
     image: require("../assets/saleBackground.jpg"),
+    // image: { saleBackground },
   },
 ];
 
@@ -35,7 +37,11 @@ function MessagesScreen() {
     <SafeArea>
       <FlatList
         data={messages}
-        style={{backgroundColor:"white", marginHorizontal: 14, borderRadius: 14}}
+        style={{
+          backgroundColor: "white",
+          marginHorizontal: 14,
+          borderRadius: 14,
+        }}
         keyExtractor={(message) => message.id.toString()}
         renderItem={({ item }) => (
           <ListItem
@@ -51,7 +57,8 @@ function MessagesScreen() {
         )}
         ItemSeparatorComponent={ListItemSeperator}
         refreshing={refreshing}
-        onRefresh={() => { setMessages(initialMessages)
+        onRefresh={() => {
+          setMessages(initialMessages);
           // setMessages([
           //   {
           //     id: 2,

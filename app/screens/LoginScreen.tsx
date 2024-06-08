@@ -4,9 +4,10 @@ import { amazonpay } from "../assets";
 import { SafeArea } from "../AreaView";
 import { AppTextInput } from "../components/textInput";
 import { CustomButton } from "../components/buttons";
-import { Formik } from "formik";
+
 import * as yup from "yup";
 import { AppErrorMessage } from "../components/appErrorMessage";
+import { Formik } from "formik";
 
 const validationSchema = yup.object({
   email: yup.string().required().label("Email").email(),

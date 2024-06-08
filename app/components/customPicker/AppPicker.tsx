@@ -8,7 +8,6 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
-import "react-native-reanimated";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Theme } from "../../styles/Theme";
@@ -55,32 +54,34 @@ export default function AppPicker({
   return (
     <>
       {/* <Modal visible={modalVisible} animationType="slide"> */}
-      <BottomSheetModalProvider>
-        <BottomSheetModal
-          ref={bottomSheetModalRef}
-          index={1}
-          snapPoints={snapPoints}>
-          <View style={{ margin: 20, borderRadius: 20 }}>
-            <Button
-              color={Theme.primaryColor}
-              title="close modal"
-              onPress={closeModal}
-            />
-          </View>
-          <FlatList
-            data={items}
-            keyExtractor={(item) => item.value.toString()}
-            renderItem={({ item }) => (
-              <DropDownList
-                label={item.label}
-                onPress={() => (
-                  closeModal(), onSelectedItem(item), valueSelected(item)
-                )}
+      <GestureHandlerRootView>
+        <BottomSheetModalProvider>
+          <BottomSheetModal
+            ref={bottomSheetModalRef}
+            index={1}
+            snapPoints={snapPoints}>
+            <View style={{ margin: 20, borderRadius: 20 }}>
+              <Button
+                color={Theme.primaryColor}
+                title="close modal"
+                onPress={closeModal}
               />
-            )}
-          />
-        </BottomSheetModal>
-      </BottomSheetModalProvider>
+            </View>
+            <FlatList
+              data={items}
+              keyExtractor={(item) => item.value.toString()}
+              renderItem={({ item }) => (
+                <DropDownList
+                  label={item.label}
+                  onPress={() => (
+                    closeModal(), onSelectedItem(item), valueSelected(item)
+                  )}
+                />
+              )}
+            />
+          </BottomSheetModal>
+        </BottomSheetModalProvider>
+      </GestureHandlerRootView>
     </>
   );
 }
