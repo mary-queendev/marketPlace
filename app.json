@@ -22,6 +22,17 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/Playfair_Display/static",
+            "./assets/fonts/Merriweather"
+          ]
+        }
+      ]
+    ]
   }
 }

@@ -29,7 +29,10 @@ export default function AppTextInput({
         {icon && (
           <MaterialCommunityIcons name={icon} size={28} color={iconColor} />
         )}
-        <TextInput style={{ marginLeft: 10, fontSize: 18 }} {...otherProps} />
+        <TextInput
+          style={{ marginLeft: 10, fontSize: 18, flex: 1 }}
+          {...otherProps}
+        />
       </View>
       {/* <Switch value={on} onValueChange={(newValue) => setOn(newValue)} /> */}
     </View>

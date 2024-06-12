@@ -3,6 +3,7 @@ import { Alert, Image, Text, TouchableOpacity, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Theme } from "../../styles/Theme";
 import Toast from "react-native-toast-message";
+import { CustomText } from "../text";
 
 export interface CustomCard {
   title: string;
@@ -48,26 +49,23 @@ export default function CustomCard({
           borderBottomEndRadius: 15,
           borderBottomStartRadius: 15,
           alignItems: "center",
-        }}
-      >
+        }}>
         <View>
-          <Text
+          <CustomText
             numberOfLines={1}
-            style={{ fontSize: 20, marginBottom: 6, marginRight: 10 }}
-          >
+            style={{ fontSize: 20, marginBottom: 6, marginRight: 10 }}>
             {title}
-          </Text>
+          </CustomText>
           <View>
-            <Text
+            <CustomText
               numberOfLines={2}
               style={{
                 fontSize: 18,
                 color: Theme.primaryColor,
                 fontWeight: "bold",
-              }}
-            >
+              }}>
               {subtitle}
-            </Text>
+            </CustomText>
           </View>
         </View>
         {cart && (

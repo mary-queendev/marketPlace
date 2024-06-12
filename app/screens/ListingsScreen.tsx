@@ -13,6 +13,7 @@ import { SafeArea } from "../AreaView";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ListItem from "../components/listItem/listItem";
 import { IconComponent } from "../components/icon";
+import { ScreenLayout } from "../components/screenLayout";
 
 const saleItems = [
   {
@@ -35,59 +36,50 @@ const saleItems = [
 
 export default function ListingsScreen() {
   return (
-    <SafeArea>
+    <ScreenLayout>
       <View
-        style={{ backgroundColor: Theme.backgroundGrey, paddingBottom: 100 }}
-      >
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          marginTop: 8,
+        }}>
+        <TextInput
+          placeholder="Search here..."
+          style={{
+            borderWidth: 2,
+            paddingHorizontal: 15,
+            maxHeight: 40,
+
+            borderRadius: 10,
+            borderColor: "grey",
+            width: "80%",
+            alignItems: "center",
+          }}></TextInput>
         <View
           style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            marginRight: 20,
-          }}
-        >
-          <TextInput
-            placeholder="Search here..."
-            style={{
-              borderWidth: 2,
-              paddingHorizontal: 15,
-              marginTop: 20,
-              marginHorizontal: 20,
-              borderRadius: 10,
-              borderColor: "grey",
-              width: "80%",
-              alignItems: "center",
-            }}
-          ></TextInput>
-          <View
-            style={{
-              marginTop: 20,
-              // borderWidth: 2,
-              borderRadius: 50,
-              padding: 6,
-              backgroundColor: Theme.primaryColor,
-            }}
-          >
-            <MaterialCommunityIcons name="comment" color="white" size={28} />
-          </View>
-        </View>
-        <View style={{ padding: 20, paddingBottom: 60 }}>
-          <FlatList
-            data={saleItems}
-            showsVerticalScrollIndicator={false}
-            renderItem={({ item }) => (
-              <TouchableOpacity activeOpacity={0.8}>
-                <CustomCard
-                  title={item.title}
-                  subtitle={item.price}
-                  image={item.image}
-                  cart
-                />
-              </TouchableOpacity>
-            )}
-          />
+            borderRadius: 50,
+            padding: 6,
+            backgroundColor: Theme.primaryColor,
+          }}>
+          <MaterialCommunityIcons name="comment" color="white" size={28} />
         </View>
       </View>
-    </SafeArea>
+      <View style={{ marginTop: 20, marginBottom: 100 }}>
+        <FlatList
+          data={saleItems}
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item }) => (
+            <TouchableOpacity activeOpacity={0.8}>
+              <CustomCard
+                title={item.title}
+                subtitle={item.price}
+                image={item.image}
+                cart
+              />
+            </TouchableOpacity>
+          )}
+        />
+      </View>
+    </ScreenLayout>
   );
 }

@@ -1,21 +1,27 @@
-import React from 'react';
-import { Text, TextProps } from 'react-native';
-
-
-export interface CustomText extends TextProps{
-    text?: string;
-    normalFont?: number;
-    topicFont?: number;
-    smallFont?: number;
+import { useFonts } from "@expo-google-fonts/playfair-display";
+import React from "react";
+import { Text, TextProps } from "react-native";
+export interface CustomText extends TextProps {
+  text?: string;
+  fontFamily?: "subTopic" | "topic" | "regular";
 }
 
-export default function CustomText({
-    text,
-    normalFont= 14,
-    topicFont= 16,
-    smallFont= 12,
-}: CustomText){
-    return(
-        <Text style={{fontSize: normalFont| topicFont| smallFont}}>{text}</Text>
-    )
-}
+const CustomText = ({ children, style, fontFamily, ...props }: CustomText) => {
+  let customFonts = "Merriweather-Regular"; // Default font
+
+  if (fontFamily === "subTopic") {
+    customFonts = "Merriweather-Bold";
+  } else if (fontFamily === "topic") {
+    customFonts = "Merriweather-Black";
+  } else if (fontFamily === "regular") {
+    customFonts = "Merriweather-Regular";
+  }
+
+  return (
+    <Text style={[{ fontFamily: customFonts }, style]} {...props}>
+      {children}
+    </Text>
+  );
+};
+
+export default CustomText;

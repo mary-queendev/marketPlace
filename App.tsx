@@ -10,6 +10,9 @@ import PostItemScreen from "./app/screens/PostItemScreen";
 import ViewImages from "./app/screens/viewImageComponent";
 import Toast, { BaseToast, ErrorToast } from "react-native-toast-message";
 import ProfileScreen from "./app/screens/ProfileScreen";
+import { NavigationContainer } from "@react-navigation/native";
+import BottomTab from "./app/navigation/bottomTabNavigation";
+import { useFonts } from "@expo-google-fonts/playfair-display";
 
 const toastConfig = {
   success: (props) => (
@@ -41,18 +44,36 @@ const toastConfig = {
 };
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    "PlayfairDisplay-Regular": require("./assets/fonts/Playfair_Display/static/PlayfairDisplay-Regular.ttf"),
+    "PlayfairDisplay-Bold": require("./assets/fonts/Playfair_Display/static/PlayfairDisplay-Bold.ttf"),
+    "PlayfairDisplay-Italic": require("./assets/fonts/Playfair_Display/static/PlayfairDisplay-Italic.ttf"),
+    "PlayfairDisplay-BoldItalic": require("./assets/fonts/Playfair_Display/static/PlayfairDisplay-BoldItalic.ttf"),
+    "PlayfairDisplay-Medium": require("./assets/fonts/Playfair_Display/static/PlayfairDisplay-Medium.ttf"),
+    "PlayfairDisplay-SemiBold": require("./assets/fonts/Playfair_Display/static/PlayfairDisplay-SemiBold.ttf"),
+    "Merriweather-Black": require("./assets/fonts/Merriweather/Merriweather-Black.ttf"),
+    "Merriweather-Regular": require("./assets/fonts/Merriweather/Merriweather-Regular.ttf"),
+    "Merriweather-Bold": require("./assets/fonts/Merriweather/Merriweather-Bold.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return;
+  }
   return (
-    <SafeArea>
-      {/* <LoginScreen /> */}
-      {/* <AccountScreen /> */}
-      {/* <LandingPage /> */}
-      {/* <ListingsScreen /> */}
-      {/* <MessagesScreen /> */}
-      {/* <PostItemScreen /> */}
-      {/* <ViewImages /> */}
-      <ProfileScreen />
-      <Toast config={toastConfig} />
-    </SafeArea>
+    <NavigationContainer>
+      <SafeArea>
+        {/* <LoginScreen /> */}
+        {/* <AccountScreen /> */}
+        {/* <LandingPage /> */}
+        {/* <ListingsScreen /> */}
+        {/* <MessagesScreen /> */}
+        {/* <PostItemScreen /> */}
+        {/* <ViewImages /> */}
+        {/* <ProfileScreen /> */}
+        <BottomTab />
+        <Toast config={toastConfig} />
+      </SafeArea>
+    </NavigationContainer>
   );
 }
 

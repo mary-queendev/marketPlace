@@ -1,6 +1,11 @@
 import { Formik } from "formik";
 import React, { useEffect, useState, useRef, useCallback } from "react";
-import { View, TouchableWithoutFeedback, Text } from "react-native";
+import {
+  View,
+  TouchableWithoutFeedback,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import * as yup from "yup";
 import { AppTextInput } from "../components/textInput";
 import { DropDownList } from "../components/dropdownList";
@@ -12,6 +17,7 @@ import { ImageInput } from "../components/imageInput";
 import * as ImagePicker from "expo-image-picker";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { ScreenLayout } from "../components/screenLayout";
 
 const validationSchema = yup.object({
   title: yup.string().required().label("Title").min(3),
@@ -67,7 +73,7 @@ export default function PostItemScreen() {
         touched,
         setFieldValue,
       }) => (
-        <View style={{ padding: 14 }}>
+        <ScreenLayout>
           {/* <ImageInput imageUri={imageUri} setImageUri={setImageUri} /> */}
           <ImageInput
             imageUri={values.imageUri}
@@ -95,7 +101,7 @@ export default function PostItemScreen() {
           />
           <AppErrorMessage error={errors.price} visible={touched.price} />
 
-          <TouchableWithoutFeedback onPress={showModal}>
+          <TouchableOpacity onPress={showModal}>
             <View
               style={{
                 padding: 10,
@@ -119,7 +125,7 @@ export default function PostItemScreen() {
               <MaterialCommunityIcons name="chevron-down" size={28} />
             </View>
             {/* <Switch value={on} onValueChange={(newValue) => setOn(newValue)} /> */}
-          </TouchableWithoutFeedback>
+          </TouchableOpacity>
           <AppErrorMessage error={errors.category} visible={touched.category} />
 
           <AppTextInput
@@ -152,7 +158,7 @@ export default function PostItemScreen() {
             placeholderColor={Theme.primaryColor}
             bottomSheetModalRef={bottomSheetModalRef}
           />
-        </View>
+        </ScreenLayout>
       )}
     </Formik>
   );
