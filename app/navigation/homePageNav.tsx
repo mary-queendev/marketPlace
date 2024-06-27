@@ -1,22 +1,17 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import ProfileScreen from "../screens/ProfileScreen";
 import MessagesScreen from "../screens/MessagesScreen";
 import BottomTab from "./bottomTabNavigation";
+import ViewImages from "../screens/viewImageComponent";
+import HomeScreen from "../screens/HomeScreen";
 
 const Stack = createStackNavigator();
 
 function HomePageNavigation() {
   return (
-    <Stack.Navigator>
-      {/* <Stack.Screen name="ProfileScreen" component={ProfileScreen} /> */}
-      <Stack.Screen
-        name="MessagesScreen"
-        component={MessagesScreen}
-        // options={{
-        //   headerTitle: "Messages",
-        //   headerStyle: { alignItems:"center", justifyContent:""},
-        // }}
-      />
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="HomeScreen" component={HomeScreen} />
+      <Stack.Screen name="MessagesScreen" component={MessagesScreen} />
+      <Stack.Screen name="ViewImages" component={ViewImages} />
     </Stack.Navigator>
   );
 }

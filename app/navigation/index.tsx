@@ -2,7 +2,6 @@ import {
   CardStyleInterpolators,
   createStackNavigator,
 } from "@react-navigation/stack";
-import ProfileScreen from "../screens/ProfileScreen";
 import MessagesScreen from "../screens/MessagesScreen";
 import HomePageNavigation from "./homePageNav";
 import BottomTab from "./bottomTabNavigation";

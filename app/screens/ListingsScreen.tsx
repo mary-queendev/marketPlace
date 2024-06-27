@@ -61,7 +61,7 @@ export default function ListingsScreen(navigation) {
             padding: 6,
             backgroundColor: Theme.primaryColor,
           }}>
-          <MaterialCommunityIcons name="comment" color="white" size={28} />
+          <MaterialCommunityIcons name="cart" color="white" size={28} />
         </View>
       </View>
       <View style={{ marginTop: 20, marginBottom: 100 }}>

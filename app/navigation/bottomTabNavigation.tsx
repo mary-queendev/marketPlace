@@ -1,11 +1,11 @@
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { IconComponent } from "../components/icon";
-import ProfileScreen from "../screens/ProfileScreen";
 import ListingsScreen from "../screens/ListingsScreen";
 import PostItemScreen from "../screens/PostItemScreen";
 import { Theme } from "../styles/Theme";
 import { Dimensions, View } from "react-native";
+import HomeScreen from "../screens/HomeScreen";
 
 const Tab = createBottomTabNavigator();
 const { width, height } = Dimensions.get("window");
@@ -47,7 +47,7 @@ export default function BottomTab() {
         })}>
         <Tab.Screen
           name="Home"
-          component={ProfileScreen}
+          component={HomeScreen}
           options={{ headerShown: false }}
         />
         <Tab.Screen

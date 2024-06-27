@@ -15,6 +15,7 @@ import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import BottomTab from "../navigation/bottomTabNavigation";
 import { CustomText } from "../components/text";
 import { useNavigation } from "@react-navigation/native";
+import { IconComponent } from "../components/icon";
 
 const favouriteItems = [
   {
@@ -36,7 +37,7 @@ const recentItems = [
 
 const { width } = Dimensions.get("window");
 
-export default function ProfileScreen({ navigation }) {
+export default function HomeScreen({ navigation }) {
   // const navigation = useNavigation();
   const scrollViewRef1 = useRef<ScrollView>(null);
   const scrollViewRef2 = useRef<ScrollView>(null);
@@ -88,7 +89,7 @@ export default function ProfileScreen({ navigation }) {
             padding: 6,
             backgroundColor: Theme.primaryColor,
           }}>
-          <MaterialCommunityIcons
+          <IconComponent
             name="comment"
             color="white"
             size={24}
@@ -96,7 +97,7 @@ export default function ProfileScreen({ navigation }) {
               navigation.navigate("HomePageNavigation", {
                 screen: "MessagesScreen",
               })
-            }></MaterialCommunityIcons>
+            }></IconComponent>
         </View>
       </View>
       <CustomText
@@ -121,12 +122,20 @@ export default function ProfileScreen({ navigation }) {
             snapToAlignment="center"
             decelerationRate="fast">
             {favouriteItems.map((item, index) => (
-              <Image
-                key={index}
-                source={item.image}
-                resizeMode="stretch"
-                style={styles.slideImage}
-              />
+              <TouchableOpacity
+                activeOpacity={1}
+                onPress={() =>
+                  navigation.navigate("HomePageNavigation", {
+                    screen: "ViewImages",
+                  })
+                }>
+                <Image
+                  key={index}
+                  source={item.image}
+                  resizeMode="stretch"
+                  style={styles.slideImage}
+                />
+              </TouchableOpacity>
             ))}
           </ScrollView>
         </View>
@@ -144,12 +153,20 @@ export default function ProfileScreen({ navigation }) {
             snapToAlignment="center"
             decelerationRate="fast">
             {recentItems.map((item, index) => (
-              <Image
-                key={index}
-                source={item.image}
-                resizeMode="stretch"
-                style={styles.slideImage}
-              />
+              <TouchableOpacity
+                activeOpacity={1}
+                onPress={() =>
+                  navigation.navigate("HomePageNavigation", {
+                    screen: "ViewImages",
+                  })
+                }>
+                <Image
+                  key={index}
+                  source={item.image}
+                  resizeMode="stretch"
+                  style={styles.slideImage}
+                />
+              </TouchableOpacity>
             ))}
           </ScrollView>
         </View>

@@ -12,15 +12,9 @@ import { Theme } from "../styles/Theme";
 import { SafeArea } from "../AreaView";
 import { saleBackground } from "../assets";
 import Toast from "react-native-toast-message";
+import { ScreenLayout } from "../components/screenLayout";
 
 export default function ViewImages() {
-  const [iconName, setIconName] = useState("cards-heart-outline");
-  const toggleFavourite = () => {
-    setIconName((prevIconName) =>
-      prevIconName === "cards-heart-outline" ? "heart" : "cards-heart-outline"
-    );
-  };
-
   const AddToCart = () => {
     Toast.show({
       type: "success",
@@ -30,37 +24,21 @@ export default function ViewImages() {
   };
 
   return (
-    <SafeArea>
-      <View
-        style={{
-          backgroundColor: Theme.backgroundGrey,
-          width: "100%",
-          height: "100%",
-          padding: 20,
-        }}
-      >
-        <View
+    <ScreenLayout headerType="favourite">
+      <ScrollView>
+        <Image
+          source={saleBackground}
           style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
+            width: "100%",
+            height: undefined,
+            aspectRatio: 1,
+            borderRadius: 10,
+            marginBottom: 30,
           }}
-        >
-          <TouchableOpacity>
-            <MaterialCommunityIcons
-              name="close"
-              color={Theme.primaryColor}
-              size={40}
-            />
-          </TouchableOpacity>
-          <TouchableWithoutFeedback onPress={toggleFavourite}>
-            <MaterialCommunityIcons
-              name={iconName}
-              color={Theme.primaryColor}
-              size={40}
-            />
-          </TouchableWithoutFeedback>
-        </View>
-        <ScrollView>
+          resizeMode="stretch"
+        />
+
+        <View>
           <Image
             source={saleBackground}
             style={{
@@ -72,53 +50,37 @@ export default function ViewImages() {
             }}
             resizeMode="stretch"
           />
-
-          <View>
-            <Image
-              source={saleBackground}
-              style={{
-                width: "100%",
-                height: undefined,
-                aspectRatio: 1,
-                borderRadius: 10,
-                marginVertical: 30,
-              }}
-              resizeMode="stretch"
-            />
-          </View>
-        </ScrollView>
-        <TouchableOpacity activeOpacity={0.5} onPress={AddToCart}>
-          <View
+        </View>
+      </ScrollView>
+      <TouchableOpacity activeOpacity={0.5} onPress={AddToCart}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            borderWidth: 2,
+            borderColor: Theme.primaryColor2,
+            borderRadius: 8,
+            margin: 20,
+          }}>
+          <Text
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-              borderWidth: 2,
-              borderColor: Theme.primaryColor2,
-              borderRadius: 8,
-              margin: 20,
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 20,
-                fontWeight: "bold",
-                color: Theme.primaryColor,
-              }}
-            >
-              Add to cart
-            </Text>
+              fontSize: 20,
+              fontWeight: "bold",
+              color: Theme.primaryColor,
+            }}>
+            Add to cart
+          </Text>
 
-            <MaterialCommunityIcons
-              // name="cards-heart-outline"
-              name="cart"
-              color={Theme.primaryColor}
-              size={40}
-              marginLeft={10}
-            />
-          </View>
-        </TouchableOpacity>
-      </View>
-    </SafeArea>
+          <MaterialCommunityIcons
+            // name="cards-heart-outline"
+            name="cart"
+            color={Theme.primaryColor}
+            size={40}
+            marginLeft={10}
+          />
+        </View>
+      </TouchableOpacity>
+    </ScreenLayout>
   );
 }

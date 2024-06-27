@@ -10,7 +10,6 @@ import MessagesScreen from "./app/screens/MessagesScreen";
 import PostItemScreen from "./app/screens/PostItemScreen";
 import ViewImages from "./app/screens/viewImageComponent";
 import Toast, { BaseToast, ErrorToast } from "react-native-toast-message";
-import ProfileScreen from "./app/screens/ProfileScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import BottomTab from "./app/navigation/bottomTabNavigation";
 import { useFonts } from "@expo-google-fonts/playfair-display";
@@ -75,7 +74,6 @@ export default function App() {
           {/* <MessagesScreen /> */}
           {/* <PostItemScreen /> */}
           {/* <ViewImages /> */}
-          {/* <ProfileScreen /> */}
           <StackNavigation />
           <Toast config={toastConfig} />
         </SafeArea>

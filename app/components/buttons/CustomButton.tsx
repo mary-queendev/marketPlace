@@ -2,7 +2,7 @@ import React from "react";
 import { Theme } from "../../styles/Theme";
 import { TouchableOpacity, Text } from "react-native";
 
-export interface CustomButton {
+export type CustomButtonProps = {
   title: string;
   borderColor?: string | Theme;
   height?: number;
@@ -12,7 +12,7 @@ export interface CustomButton {
   onPress?: () => void;
   borderRadius?: number;
   borderWidth?: number;
-}
+};
 
 export default function CustomButton({
   title,
@@ -24,7 +24,7 @@ export default function CustomButton({
   onPress,
   borderRadius = 10,
   borderWidth = 2,
-}: CustomButton) {
+}: CustomButtonProps) {
   return (
     <TouchableOpacity
       style={{

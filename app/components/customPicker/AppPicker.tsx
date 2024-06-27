@@ -22,7 +22,7 @@ import {
 } from "@gorhom/bottom-sheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
-export interface AppPicker {
+export type AppPicker = {
   icon?: string;
   iconColor?: string;
   placeholder: string;
@@ -32,7 +32,7 @@ export interface AppPicker {
   onSelectedItem?: any;
   valueSelected?: any;
   placeholderColor?: string;
-}
+};
 
 export default function AppPicker({
   bottomSheetModalDisplay,

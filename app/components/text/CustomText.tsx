@@ -1,12 +1,17 @@
 import { useFonts } from "@expo-google-fonts/playfair-display";
 import React from "react";
 import { Text, TextProps } from "react-native";
-export interface CustomText extends TextProps {
+export interface CustomTextProps extends TextProps {
   text?: string;
   fontFamily?: "subTopic" | "topic" | "regular";
 }
 
-const CustomText = ({ children, style, fontFamily, ...props }: CustomText) => {
+const CustomText = ({
+  children,
+  style,
+  fontFamily,
+  ...props
+}: CustomTextProps) => {
   let customFonts = "Merriweather-Regular"; // Default font
 
   if (fontFamily === "subTopic") {

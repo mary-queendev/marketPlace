@@ -25,7 +25,7 @@ const initialMessages = [
   },
 ];
 
-function MessagesScreen() {
+function MessagesScreen({ navigation }) {
   const [messages, setMessages] = useState(initialMessages);
   const [refreshing, setRefreshing] = useState(false);
 
@@ -35,7 +35,11 @@ function MessagesScreen() {
   };
 
   return (
-    <ScreenLayout>
+    <ScreenLayout
+      headerType="inner-landing"
+      title="My Messages"
+      // backButtonPress={() => navigation.goBack()}
+    >
       <FlatList
         data={messages}
         style={{
