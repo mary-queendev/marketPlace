@@ -146,7 +146,6 @@ export default function PostItemScreen() {
           <CustomButton title="POST" onPress={handleSubmit} />
 
           <AppPicker
-            placeholder="Category"
             selectedItem={selectedCategory}
             onSelectedItem={(item) => setSelectedCategory(item.label)}
             items={category}
@@ -156,7 +155,7 @@ export default function PostItemScreen() {
             onBlur={() => setFieldTouched("category")}
             value={values.category}
             placeholderColor={Theme.primaryColor}
-            bottomSheetModalRef={bottomSheetModalRef}
+            bottomSheetModalDisplay={bottomSheetModalRef}
           />
         </ScreenLayout>
       )}

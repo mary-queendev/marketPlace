@@ -1,3 +1,4 @@
+import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeArea } from "./app/AreaView";
@@ -13,6 +14,10 @@ import ProfileScreen from "./app/screens/ProfileScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import BottomTab from "./app/navigation/bottomTabNavigation";
 import { useFonts } from "@expo-google-fonts/playfair-display";
+import HomePageNavigation from "./app/navigation/homePageNav";
+import StackNavigation from "./app/navigation";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
 const toastConfig = {
   success: (props) => (
@@ -60,20 +65,22 @@ export default function App() {
     return;
   }
   return (
-    <NavigationContainer>
-      <SafeArea>
-        {/* <LoginScreen /> */}
-        {/* <AccountScreen /> */}
-        {/* <LandingPage /> */}
-        {/* <ListingsScreen /> */}
-        {/* <MessagesScreen /> */}
-        {/* <PostItemScreen /> */}
-        {/* <ViewImages /> */}
-        {/* <ProfileScreen /> */}
-        <BottomTab />
-        <Toast config={toastConfig} />
-      </SafeArea>
-    </NavigationContainer>
+    <GestureHandlerRootView>
+      <BottomSheetModalProvider>
+        <SafeArea>
+          {/* <LoginScreen /> */}
+          {/* <AccountScreen /> */}
+          {/* <LandingPage /> */}
+          {/* <ListingsScreen /> */}
+          {/* <MessagesScreen /> */}
+          {/* <PostItemScreen /> */}
+          {/* <ViewImages /> */}
+          {/* <ProfileScreen /> */}
+          <StackNavigation />
+          <Toast config={toastConfig} />
+        </SafeArea>
+      </BottomSheetModalProvider>
+    </GestureHandlerRootView>
   );
 }
 

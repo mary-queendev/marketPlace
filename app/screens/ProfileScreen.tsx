@@ -14,6 +14,7 @@ import { ScreenLayout } from "../components/screenLayout";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import BottomTab from "../navigation/bottomTabNavigation";
 import { CustomText } from "../components/text";
+import { useNavigation } from "@react-navigation/native";
 
 const favouriteItems = [
   {
@@ -35,7 +36,8 @@ const recentItems = [
 
 const { width } = Dimensions.get("window");
 
-export default function ProfileScreen() {
+export default function ProfileScreen({ navigation }) {
+  // const navigation = useNavigation();
   const scrollViewRef1 = useRef<ScrollView>(null);
   const scrollViewRef2 = useRef<ScrollView>(null);
   const [currentIndex1, setCurrentIndex1] = useState(0);
@@ -86,7 +88,15 @@ export default function ProfileScreen() {
             padding: 6,
             backgroundColor: Theme.primaryColor,
           }}>
-          <MaterialCommunityIcons name="comment" color="white" size={24} />
+          <MaterialCommunityIcons
+            name="comment"
+            color="white"
+            size={24}
+            onPress={() =>
+              navigation.navigate("HomePageNavigation", {
+                screen: "MessagesScreen",
+              })
+            }></MaterialCommunityIcons>
         </View>
       </View>
       <CustomText

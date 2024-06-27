@@ -34,7 +34,7 @@ const saleItems = [
   },
 ];
 
-export default function ListingsScreen() {
+export default function ListingsScreen(navigation) {
   return (
     <ScreenLayout>
       <View

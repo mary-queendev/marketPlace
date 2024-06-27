@@ -7,6 +7,7 @@ import { Theme } from "../styles/Theme";
 
 import ListItemDeleteAction from "../components/listItemDeleteAction/ListItemDeleteAction";
 import { ListItemSeperator } from "../components/listItemSeperator";
+import { ScreenLayout } from "../components/screenLayout";
 
 const initialMessages = [
   {
@@ -34,26 +35,27 @@ function MessagesScreen() {
   };
 
   return (
-    <SafeArea>
+    <ScreenLayout>
       <FlatList
         data={messages}
         style={{
           backgroundColor: "white",
-          marginHorizontal: 14,
           borderRadius: 14,
         }}
         keyExtractor={(message) => message.id.toString()}
         renderItem={({ item }) => (
-          <ListItem
-            title={item.title}
-            subtitle={item.description}
-            icon
-            image={item.image}
-            onPress={() => {}}
-            renderLeftActions={() => (
-              <ListItemDeleteAction onPress={() => handleDelete(item)} />
-            )}
-          />
+          <View style={{ gap: 10 }}>
+            <ListItem
+              title={item.title}
+              subtitle={item.description}
+              icon
+              image={item.image}
+              onPress={() => {}}
+              renderLeftActions={() => (
+                <ListItemDeleteAction onPress={() => handleDelete(item)} />
+              )}
+            />
+          </View>
         )}
         ItemSeparatorComponent={ListItemSeperator}
         refreshing={refreshing}
@@ -69,7 +71,7 @@ function MessagesScreen() {
           // ]);
         }}
       />
-    </SafeArea>
+    </ScreenLayout>
   );
 }
 
